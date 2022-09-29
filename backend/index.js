@@ -1,10 +1,33 @@
 var express = require('express');
+var ejs = require('ejs');
+var mysql =  require('mysql');
+
+
+mysql.createConnection({
+    host:'localhost',
+    user: 'root',
+    password: '',
+    database: 'thrift'
+})
+
 var app = express();
 
-app.get('/', function (req, res) {
-  res.send('Hello World!'); // This will serve your request to '/'.
-});
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
-app.listen(8000, function () {
-  console.log('listening on port 8000!');
- });
+app.listen(8080);
+
+app.get('/', function(req,res){
+
+    var con = mysql.createConnection({
+        host:'localhost',
+        user: 'root',
+        password: '',
+        database: 'thrift'
+    })
+
+    con.query("SELECT * FROM customer", (err,result)=>{
+        res.render('pages/index',{return:res});
+    })
+
+});
