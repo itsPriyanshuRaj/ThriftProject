@@ -1,17 +1,10 @@
-var express = require('express')
-var ejs = require('ejs')
-
+var express = require('express');
 var app = express();
 
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
-
-
-app.listen(8080)
-//localhost:8080
-
-app.get('/',function(req,res){
-
-    res.render('pages/index');
-
+app.get('/', function (req, res) {
+  res.send('Hello World!'); // This will serve your request to '/'.
 });
+
+app.listen(8000, function () {
+  console.log('listening on port 8000!');
+ });
