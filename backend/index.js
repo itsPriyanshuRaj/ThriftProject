@@ -1,33 +1,46 @@
 var express = require('express');
-var ejs = require('ejs');
-var mysql =  require('mysql');
-
-
-mysql.createConnection({
-    host:'localhost',
-    user: 'root',
-    password: '',
-    database: 'thrift'
-})
-
+var mysql = require('mysql');
 var app = express();
 
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
-
-app.listen(8080);
-
-app.get('/', function(req,res){
-
-    var con = mysql.createConnection({
-        host:'localhost',
-        user: 'root',
-        password: '',
-        database: 'thrift'
-    })
-
-    con.query("SELECT * FROM customer", (err,result)=>{
-        res.render('pages/index',{return:res});
-    })
-
+var connection = mysql.createPool({
+  connectionLimit: 100,
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'thrift'
 });
+
+
+app.get('/', function (req, res) {
+  //about mysql
+  connection.getConnection(function (error, tempCont) {
+
+    if (!!error) {
+      tempCont.release();
+      console.log("Error");
+    } else {
+      console.log("Connected with database");
+
+
+      tempCont.query(`SELECT * FROM product`, function (error, rows, fields) {
+        tempCont.release();
+        if (!!error) {
+          console.log("Error in the query");
+        } else {
+          res.json(rows);
+        }
+      })
+    }
+  });
+
+
+  // connection.query(`SELECT * FROM product`, function(error,rows,fields){
+  //   if(!!error){
+  //     console.log("Error in the query");
+  //   } else{
+  //     console.log("Successfull query");
+  //     console.log(rows);
+  //   }
+  // });
+})
+app.listen(8080);
