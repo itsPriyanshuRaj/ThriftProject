@@ -1,0 +1,76 @@
+<nav class="navbar bg-light">
+	<div class="container-fluid">
+	  <span class="navbar-brand mb-0 h1 text-center">Product List</span>
+	</div>
+  </nav>
+
+<div class="container-fluid w-75 p-3">
+	<div class="container">
+		<div class="row">
+                    <!--/.span3-->
+                    <div class="span9">
+						<div class="content" style="width: 150%; margin-left: -90px;">
+                            
+                            <div class="module">
+							<div class="module-head">
+								<h2 class="box-title">Product List</h2>
+							</div>
+							<div class="module-body">
+								<div class="col-xs-12">
+									<div class="box">
+										<div class="box-header">
+										
+											
+											<div class="box-tools">
+												<div class="input-group input-group-sm hidden-xs" >
+											<input type="text" name="table_search" class="form-control pull-right" placeholder="Search Your Product Here" [(ngModel)]="search">
+											
+											
+										</div>
+										<br/>
+									</div>
+									  </div>
+									  <!-- /.box-header -->
+									  <div class="table-responsive" >
+										<table id="example" class="table table-hover" >
+										  <tbody><tr>
+											<th>Product</th>
+											<th>Name</th>
+											<th>Price</th>
+											<th>Category</th>
+											<th></th>
+										</tr>
+                                          <!-- edit this also same errror here -->
+										  <tr *ngFor="let model of models">
+											  <td><img src="http://localhost:3000/{{model.PRODUCT_IMAGE}}" height="60px"></td>
+											<td>{{model.PRODUCT_NAME}}</td>
+											<td>{{model.PRICE}}</td>
+											<td>{{model.CATEGORY}}</td>
+											<td><i class="fas fa-trash" (click)="Delete(model.PRODUCT_ID)"></i></td>
+											
+										</tr>
+										  
+									</tbody></table>
+									<!-- <pagination-controls (pageChange)="p=$event"></pagination-controls> -->
+									</div>
+									  <!-- /.box-body -->
+									</div>
+									<!-- /.box -->
+									
+									<button type="button" class="btn btn-warning" [routerLink]="['/adminDash']">Back to Dashboard</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/.content-->
+			</div>
+			<!--/.span9-->
+		</div>
+	</div>
+	<!--/.container-->
+</div>
+<!--/.wrapper-->
+    
+        
+       
+

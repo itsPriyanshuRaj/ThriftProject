@@ -1,0 +1,61 @@
+
+<!-- ================ category section start ================= -->		  
+<section class="section-margin--small mb-5">
+  <div class="card-top container-fluid">
+    <div class="container d-flex">
+        <div class="item">
+            <a>
+                <img src="https://cdn-icons-png.flaticon.com/512/1474/1474713.png" alt="">
+                <h6>All products</h6>
+            </a>
+        </div>
+        <div class="item">
+            <a>
+                <img src="https://cdn-icons-png.flaticon.com/512/3696/3696504.png" alt="">
+                <h6>Electronics</h6>
+            </a>
+        </div>
+        <div class="item">
+            <a>
+                <img src="https://cdn-icons-png.flaticon.com/512/170/170951.png" alt="">
+                <h6>Furniture</h6>
+            </a>
+        </div>
+    </div>
+  </div>
+    <div class="container shadow p-3 mb-5 bg-body rounded">
+      <div class="row">
+        <div class="col-xl-9 col-lg-8 col-md-7">
+          <!-- Start Filter Bar -->
+          <div class="filter-bar d-flex flex-wrap align-items-center">
+            
+            <div class="sorting mr-auto">
+              <button type="button" class="btn btn-block btn-outline-info btn-light" (click)="ngOnInit()">Show All Products</button>
+            </div>
+          </div>
+          <!-- End Filter Bar -->
+          <!-- Start Best Seller -->
+          <section class="lattest-product-area pb-40 category-list">
+            <div class="row">
+              <div *ngFor="let shop of shopper" class="col-md-6 col-lg-4">
+                <div class="card text-center card-product">
+                  <div class="card-product__img">
+                    <a [routerLink]="['/product/',shop.PRODUCT_ID]"><img class="card-img" src="http://localhost:3000/{{shop.PRODUCT_IMAGE}}" alt=""></a>
+                   
+                  </div>
+                  <div class="card-body">
+                    <p>{{shop.COMPANY_NAME}}</p>
+                    <h4 class="card-product__title"><a [routerLink]="['/product/',shop.PRODUCT_ID]">{{shop.PRODUCT_NAME}}</a></h4>
+                    <p class="card-product__price">{{shop.PRICE | currency: "&#8377; "}}</p>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+            <!-- <pagination-controls (pageChange)="p=$event"></pagination-controls> -->
+          </section>
+          <!-- End Best Seller -->
+        </div>
+      </div>
+    </div>
+  </section> 

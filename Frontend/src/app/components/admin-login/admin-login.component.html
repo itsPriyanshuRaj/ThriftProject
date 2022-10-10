@@ -1,0 +1,41 @@
+
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 text-center">Admin Login</span>
+  </div>
+</nav>
+<!-- Automatic element centering -->
+<div class="container-fluid w-75 p-3">
+  <div class="lockscreen-logo">
+    <p class="lead text-center"><b>Welcome to Thrift Admin Access </b></p>
+  </div>
+  <!-- User name -->
+  <p class="lead text-center">Enter your PIN to access!</p>
+
+  <!-- START LOCK SCREEN ITEM -->
+  <div class="lockscreen-item">
+    <!-- lockscreen image -->
+    <div class="lockscreen-image">
+      <img style="height: 70px;" class="rounded mx-auto d-block" src="https://bit.ly/3CJXUOe" alt="Admin Icon">
+    </div>
+    <!-- /.lockscreen-image -->
+
+    <!-- lockscreen credentials (contains the form) -->
+    <form class="lockscreen-credentials">
+      <div class="input-group">
+        <input type="password" id="password" name="password" [(ngModel)]="model.password" #password="ngModel"
+          class="form-control" placeholder="password">
+      </div>
+      <div class="input-group">
+        <button type="submit" class="btn btn-danger mt-3" (click)="Login($event)">Login</button>
+      </div>
+    </form>
+    <!-- /.lockscreen credentials -->
+
+  </div>
+  <!-- /.lockscreen-item -->
+  <div class="lockscreen-footer text-center">
+    Copyright &copy; 2022-2023 <b><a [routerLink]="['/']" class="text-black">Back to Thrift</a></b><br>
+    All rights reserved
+  </div>
+</div>
