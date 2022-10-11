@@ -28,7 +28,7 @@ app.use(express.static('uploads'));
 //to fetch products from the database by their product ID
 app.get('/getProduct/:ProductId',(req,res)=>{
     console.log(req.params.ProductId)
-sqlquery="SELECT COMPANY.COMPANY_NAME,PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_NAME,PRODUCT.PRODUCT_DESCRIPTION,PRODUCT.PRODUCT_IMAGE,PRODUCT.PRICE,PRODUCT.CATEGORY,PRODUCT.AVAILABLE FROM PRODUCT INNER JOIN COMPANY ON COMPANY.COMPANY_ID=PRODUCT.COMPANY_ID WHERE PRODUCT_ID="+req.params.ProductId;
+sqlquery="SELECT COMPANY.COMPANY_NAME,PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_NAME,PRODUCT.PRODUCT_DESC,PRODUCT.PRODUCT_IMAGE,PRODUCT.PRICE,PRODUCT.CATEGORY,PRODUCT.AVAILABLE FROM PRODUCT INNER JOIN COMPANY ON COMPANY.COMPANY_ID=PRODUCT.COMPANY_ID WHERE PRODUCT_ID="+req.params.ProductId;
 connection.query(sqlquery,(err,result)=>{
     if(err) console.log(err)
     if(result.length){
@@ -341,7 +341,7 @@ console.log(req.body);
 
 var company=req.body.company;
 var product=req.body.product;
-var description = req.body.description;
+var desc = req.body.desc;
 var image=imagename;
 var category=req.body.category;
 available=Boolean(available);
@@ -349,7 +349,7 @@ available=Boolean(available);
 
     
     sqlcompany="INSERT IGNORE INTO COMPANY(COMPANY_NAME) VALUES('"+company+"')"; 
-    sqlproduct="INSERT INTO PRODUCT(COMPANY_ID,PRODUCT_NAME,PRODUCT_DESCRIPTION,PRODUCT_IMAGE,PRICE,CATEGORY,AVAILABLE) VALUES((SELECT COMPANY.COMPANY_ID FROM COMPANY WHERE COMPANY_NAME='"+company+"'),'"+product+"','"+description+"','"+image+"','"+category+"',"+available+")"
+    sqlproduct="INSERT INTO PRODUCT(COMPANY_ID,PRODUCT_NAME,DESC,PRODUCT_IMAGE,PRICE,CATEGORY,AVAILABLE) VALUES((SELECT COMPANY.COMPANY_ID FROM COMPANY WHERE COMPANY_NAME='"+company+"'),'"+product+"','"+desc+"','"+image+"','"+category+"',"+available+")"
     
     connection.query(sqlcompany,(err,result)=>{
         if(err) console.log(err);
