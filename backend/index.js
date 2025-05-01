@@ -6,9 +6,10 @@ var multer=require('multer')
 var connection=require('./db.conf')
 var randomstring=require("randomstring")
 var datetime=require("node-datetime")
-// var nodemailer = require('nodemailer');
-
-
+var nodemailer = require('nodemailer');
+const { query } = require('express');
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 var imagename;
 const storage=multer.diskStorage({
@@ -67,9 +68,8 @@ app.get('/deleteProduct/:id',(req,res)=>{
 
 //write something here as well
 app.get('/getLimitData/:limit',(req,res)=>{
-    //console.log(req.params.limit);
+//console.log(req.params.limit);
 sqlgetData1="SELECT COMPANY.COMPANY_NAME,PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_NAME,PRODUCT.PRODUCT_IMAGE,PRODUCT.PRICE,PRODUCT.CATEGORY FROM PRODUCT INNER JOIN COMPANY ON COMPANY.COMPANY_ID=PRODUCT.COMPANY_ID ORDER BY PRODUCT.PRODUCT_ID LIMIT "+req.params.limit;
-
 
 
 connection.query(sqlgetData1,(err,result)=>{
@@ -82,16 +82,16 @@ connection.query(sqlgetData1,(err,result)=>{
 })
 
 //to get products by category (not working!!!!! properly)
-app.get('/getCategory',(req,res)=>{
-    sqlquery="select company.company_id,company.company_name,count(product.company_id) AS count from company inner join product on company.company_id=product.company_id group by company.company_id";
-    connection.query(sqlquery,(err,result)=>{
-        if(err) console.log(err)
-        if(result.length){
-            console.log(result)
-            res.send(result)
-        }
-    })
-})
+// app.get('/getCategory',(req,res)=>{
+//     sqlquery="select company.company_id,company.company_name,count(product.company_id) AS count from company inner join product on company.company_id=product.company_id group by company.company_id";
+//     connection.query(sqlquery,(err,result)=>{
+//         if(err) console.log(err)
+//         if(result.length){
+//             console.log(result)
+//             res.send(result)
+//         }
+//     })
+// })
 
 // app.get('/CompanyFilter/:companyid',(req,res)=>{
 //     sqlquery="SELECT COMPANY.COMPANY_NAME,PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_NAME,PRODUCT.PRODUCT_IMAGE,PRODUCT.PRICE FROM PRODUCT INNER JOIN COMPANY ON COMPANY.COMPANY_ID=PRODUCT.COMPANY_ID where product.company_id="+req.params.companyid;
@@ -120,7 +120,7 @@ app.get('/getAddress/:customer_id',(req,res)=>{
 //uploading image through this method
 app.post('/upload',upload.single('Image'),(req,res)=>{
 console.log(`File Has been upload to Server ${req.file.originalname}`);
-//res.end(JSON.stringify("File Upload to Server"))
+res.end(JSON.stringify("File Upload to Server"))
 })
 app.use(bodyParser.json());
 
@@ -146,7 +146,7 @@ app.post('/processRegister',(req,res)=>{
         if(err) console.log(err)
         
         res.send({success:true})
-        // var message=' '+name+' Welcome to Thrift you have been successfully registered with Email '+email+''
+        var message=' '+name+' Welcome to Thrift you have been successfully registered with Email '+email+''
         // sendMessage(message,phone)
         // sendEmail(email,'Thrift New Customer','<h4>'+message+'</h4>')
     })
@@ -191,20 +191,20 @@ app.get('/getReview/:id',(req,res)=>{
 })
 
 //to change the password of the user (Currenlty not working)
-// app.post('/changePassword',(req,res)=>{
-//     console.log(req.body)
-//     sqlquery="UPDATE CUSTOMER SET PASSWORD='"+req.body.Password+"' WHERE EMAIL='"+req.body.email+"' AND PASSWORD='"+req.body.Old+"'"
-//     console.log(sqlquery)
-//     connection.query(sqlquery,(err,result)=>{
-//         if(err) console.log(err)
-//         if (result.affectedRows>0) {
-//             res.send({success:true})
-//             var message='<h2>Hello User,<br/>Your Password Has Been Sucessfully Changed <br/> Your New Password is '+req.body.Password+' </h2> <br/> <h3> You Can Login to Mobikart from <a href="http://localhost:4200/">Here</a></h2>'
-//             sendEmail(req.body.email,'Mobikart Password Changed',message)
-//         }
-//         else res.send({success:false})
-//     })
-// })
+app.post('/changePassword',(req,res)=>{
+    console.log(req.body)
+    sqlquery="UPDATE CUSTOMER SET PASSWORD='"+req.body.Password+"' WHERE EMAIL='"+req.body.email+"' AND PASSWORD='"+req.body.Old+"'"
+    console.log(sqlquery)
+    connection.query(sqlquery,(err,result)=>{
+        if(err) console.log(err)
+        if (result.affectedRows>0) {
+            res.send({success:true})
+            var message='<h2>Hello User,<br/>Your Password Has Been Sucessfully Changed <br/> Your New Password is '+req.body.Password+' </h2> <br/> <h3> You Can Login to Thrift from <a href="http://localhost:4200/">Here</a></h2>'
+            sendEmail(req.body.email,'Thrift Password Changed',message)
+        }
+        else res.send({success:false})
+    })
+})
 
 //to update an exitsing address 
 app.post('/updateAddress',(req,res)=>{
@@ -223,21 +223,21 @@ app.post('/updateAddress',(req,res)=>{
     })
     
 })
-// function sendMessage(message,phone){
-//     const fast2sms = require('fast-two-sms')
-//     var number=phone
-//     var message=message
-//     console.log(number,message)
-//     var options = {authorization : 'Your Authorization Key' , message : message ,  numbers : [number]} 
-//     fast2sms.sendMessage(options).then(response=>{
-//         console.log(response)
-//       })
+function sendMessage(message,phone){
+    const fast2sms = require('fast-two-sms')
+    var number=phone
+    var message=message
+    console.log(number,message)
+    var options = {authorization : 'Your Authorization Key' , message : message ,  numbers : [number]} 
+    fast2sms.sendMessage(options).then(response=>{
+        console.log(response)
+      })
     
-// }
+}
 // function sendEmail(Email,Subject,Message){
 //     var transporter = nodemailer.createTransport({
 //         service: 'gmail',
-//         host:'smtp.gamil.com',
+//         host:'smtp.gmail.com',
 //         auth: {
 //           user: 'Your G-Mail Id',
 //           pass: 'GMail Password'
@@ -296,19 +296,31 @@ res.send({success:true,purchase_time:time})
 })
 
 //to send the email regarding order
-// app.post('/sendEmail',(req,res)=>{
-//     var email=req.body.email
-//     sqlquery="SELECT PASSWORD,NAME FROM CUSTOMER WHERE EMAIL='"+email+"'"
-//     connection.query(sqlquery,(err,result)=>{
-//         if(err) console.log(err)
-//         if(result.length>0){
-//             var message='<h2>Hello '+result[0].NAME+',<br/>Your Password is '+result[0].PASSWORD+' <br/>  You Can Login to Mobikart from <a href="http://localhost:4200/">Here</a></h2><br/><h3> You can Change Your Password from <a href="http://localhost:4200/changePassword?email='+email+'">Here</a></h3>'
-//             sendEmail(email,'Mobikart Forget Password',message)
-//             res.send({success:true})
-//         }
-//         else res.send({success:false})
-//     })
-// })
+app.post('/sendEmail',(req,res)=>{
+    var email=req.body.email
+    sqlquery="SELECT PASSWORD,NAME FROM CUSTOMER WHERE EMAIL='"+email+"'"
+    connection.query(sqlquery,(err,result)=>{
+        if(err) console.log(err)
+        if(result.length>0){
+            var message='<h2>Hello '+result[0].NAME+',<br/>Your Password is '+result[0].PASSWORD+' <br/>  You Can Login to Thrift Ecommerce from <a href="http://localhost:4200/">Here</a></h2><br/><h3> You can Change Your Password from <a href="http://localhost:4200/changePassword?email='+email+'">Here</a></h3>'
+            sendEmail(email,'Thrit Ecommerce Forget Password',message)
+            res.send({success:true})
+        }
+        else res.send({success:false})
+    })
+})
+
+//checking order details for the specific users
+app.post('/cusOrderData', (req,res)=>{
+    console.log(req.body);
+    sqlquery = "SELECT * FROM ORDERS WHERE CUSTOMER_ID" + req.body.id+"";
+    connection.query(sqlquery,(err,result)=>{
+        if(err) console.log(err)
+        else res.send(result);
+    })
+});
+
+// ends here
 
 //to get the order data(details)
 app.post('/getOrderData',(req,res)=>{
@@ -337,38 +349,54 @@ app.post('/getAdminOrders',(req,res)=>{
 
 
 app.post('/process',function(req,res){
-console.log(req.body);
-
-var company=req.body.company;
-var product=req.body.product;
-var desc = req.body.desc;
-var image=imagename;
-var category=req.body.category;
-available=Boolean(available);
-
-
+    console.log(req.body);
     
-    sqlcompany="INSERT IGNORE INTO COMPANY(COMPANY_NAME) VALUES('"+company+"')"; 
-    sqlproduct="INSERT INTO PRODUCT(COMPANY_ID,PRODUCT_NAME,DESC,PRODUCT_IMAGE,PRICE,CATEGORY,AVAILABLE) VALUES((SELECT COMPANY.COMPANY_ID FROM COMPANY WHERE COMPANY_NAME='"+company+"'),'"+product+"','"+desc+"','"+image+"','"+category+"',"+available+")"
+    var company=req.body.company;
+    var companyID=req.body.companyID;
+    var product=req.body.product;
+    var image=imagename;
+    var range=req.body.range;
+    var desc=req.body.desc;
+    var category=req.body.category;
+    var available=req.body.available;
+    available=Boolean(available);
     
-    connection.query(sqlcompany,(err,result)=>{
-        if(err) console.log(err);
-        //console.log(result);
+        sqlcompany="INSERT IGNORE INTO COMPANY(COMPANY_NAME) VALUES('"+company+"')"; 
+        sqlproduct= "INSERT INTO PRODUCT(COMPANY_ID,PRODUCT_NAME,PRODUCT_IMAGE,PRICE,PRODUCT_DESC,CATEGORY,AVAILABLE) VALUES('"+companyID+"','"+product+"','"+image+"','"+range+"','"+desc+"','"+category+"','"+available+"')"
         
-    
-    //res.send("Company Inserted");
-    });
-    connection.query(sqlproduct,(err,result)=>{
-        if(err) console.log(err)
-        //console.log(result);
-        //res.send("Product Inserted");
-    });
-res.send(JSON.stringify(req.body));
-})
+        connection.query(sqlcompany,(err,result)=>{
+            if(err) console.log(err);
+            console.log(result);
+            
+        
+        // res.send("Company Inserted");
+        });
+        connection.query(sqlproduct,(err,result)=>{
+            if(err) console.log(err)
+            console.log(result);
+            // res.send("Product Inserted");
+        });
+    res.send(JSON.stringify(req.body));
+    })
 
 app.get('/priyanshu',(req,res)=>{
     res.send("Welcome to the Server of Thrift E-Commerce Website")
 })
+
+
+
+//query to fetch the product category from the database
+app.get('/catgeoryPro', (req,res)=>{
+    console.log(req.body);
+    // const category = req.query.category;
+    const sqlquery = " SELECT PRODUCT.CATEGORY FROM PRODUCT"
+    connection.query(sqlquery,(err,result) => {
+        if(err) console.log(err)
+        else res.send(result);
+    })
+})
+
+
 
 var server=app.listen(3000,function(){
 console.log("Server has Started at port 3000")});
