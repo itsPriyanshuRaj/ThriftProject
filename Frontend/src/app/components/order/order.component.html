@@ -1,63 +1,62 @@
-
-
-<!--================Cart Area =================-->
-<br/>
-<h3 style="margin-left:50px">Your Orders</h3>
+<h3 class="display-5" style="margin-left:50px">Your Orders</h3>
 <section class="cart_area">
-    
-  <div class="container">
-    
-      <div class="cart_inner">
-          
-          <div class="table-responsive">
-              <table class="table" style="width:100%">
-                  <thead>
-                      <tr>
-                          <th scope="col">Product</th>
-                          <th scope="col">Price</th>
-                          <th scope="col">Order Placed</th>
-                          <th scope="col">Order Id</th>
-                          <th scope="col">Payment Mode</th>
-                          
-                      </tr>
-                  </thead>
-                  <tbody>
-                      
-                      <tr *ngFor="let stores of stored">
-                          <td>
-                              <div class="media">
-                                  <div class="d-flex">
-                                      <img src="http://localhost:3000/{{stores.PRODUCT_IMAGE}}" height="150px" alt="">
-                                  </div>
-                                  <div class="media-body">
-                                      <h5>{{stores.PRODUCT_PURCHASED}}</h5>
-                                  </div>
-                              </div>
-                          </td>
-                          <td>
-                              <h5>{{stores.PRODUCT_PRICE | currency: "&#8377;"}}</h5>
-                              
-                          </td>
-                          <td style="width:20%;">
-                            <h5>{{stores.PURCHASE_DATE| date: 'MMM d, y'}}&nbsp;{{stores.PURCHASE_TIME}}</h5>
-                            
-                        </td>
-                        <td>
-                            <h5>{{stores.ORDER_ID}}</h5>
-                            
-                        </td>
-                        <td style="width:14%">
-                            <h5>{{stores.PAYMENT_MODE}}</h5>
-                            
-                        </td>
 
-                         
-                         
-                      </tr>
-                      
-                  </tbody>
-              </table>
-          </div>
-      </div>
-  </div>
+    <div class="container-sm shadow p-3 mb-5 bg-body rounded">
+
+        <div class="cart_inner">
+
+            <div class="table-responsive">
+                <table class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Purchase Date and Time</th>
+                            <th scope="col">Order Id</th>
+                            <th scope="col">Payment Mode</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let stores of stored | paginate:{itemsPerPage:6,currentPage:p};">
+                            <td>
+                                <div class="media-body">
+                                    <img src="http://localhost:3000/{{stores.PRODUCT_IMAGE}}" height="90px">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="media-body">
+                                    <p>{{stores.PRODUCT_PURCHASED}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div >
+                                    <p>{{stores.PRODUCT_PRICE}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <p>{{stores.PURCHASE_DATE| date: 'MMM d, y'}}&nbsp;{{stores.PURCHASE_TIME}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div >
+                                    <p>{{stores.ORDER_ID}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div >
+                                    <p>{{stores.PAYMENT_MODE}}</p>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+    </div>
 </section>

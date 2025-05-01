@@ -1,0 +1,9 @@
+.price{
+    margin-left: 100px;
+    margin-top: 120px;
+}
+
+a{
+    cursor: grab;
+    text-decoration: none;
+}

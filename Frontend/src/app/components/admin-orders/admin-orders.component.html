@@ -4,18 +4,79 @@
   </div>
 </nav>
 
-<div class="container shadow p-3 mb-5 bg-body rounded">
-  <table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Order ID</th>
-      <th scope="col">Customer Name</th>
-      <th scope="col">Product Purchased</th>
-      <th scope="col">Price</th>
-      <th scope="col">Email</th>
-    </tr>
-  </thead>
-</table>
-<button type="button" class="btn btn-block btn-outline-danger" [routerLink]="['/adminDash']"><i class="fas fa-chevron-left"></i> Back to Dashboard</button>
+<div class="jumbotron jumbotron-fluid jumbo">
+    <div class="text-center">
+        <h1 class="display-5">Customer Orders</h1>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center" style="margin-top: -200px; z-index: 1px;">
+        <div class="col">
+            <div class="card shadow" style="border: none;">
+                <div class="card-header">
+                    <p class="card-title lead">All Orders</p>
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr class="table-light">
+                                    <th scope="col">Product Purchased</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Order Date and Time</th>
+                                    <th scope="col">Order Id</th>
+                                    <th scope="col">Payment Mode</th>
+                                    <th scope="col">Customer Name</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let stores of stored | paginate:{itemsPerPage:6,currentPage:p};">
+                                    <td>
+                                        <div class="media">
+                                            <!-- <div class="d-flex">
+                                                        <img src="http://localhost:3000/{{stores.PRODUCT_IMAGE}}" height="150px" alt="">
+                                                    </div> -->
+                                            <div class="media-body">
+                                                <p>{{stores.PRODUCT_PURCHASED}}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>{{stores.PRODUCT_PRICE | currency: "&#8377;"}}</p>
+
+                                    </td>
+                                    <td style="width:20%;">
+                                        <p>{{stores.PURCHASE_DATE| date: 'MMM d, y'}}&nbsp;{{stores.PURCHASE_TIME}}
+                                        </p>
+
+                                    </td>
+                                    <td>
+                                        <p>{{stores.ORDER_ID}}</p>
+
+                                    </td>
+                                    <td style="width:14%">
+                                        <p>{{stores.PAYMENT_MODE}}</p>
+
+                                    </td>
+
+                                    <td>
+                                        <div>
+                                            <p>{{stores.CUSTOMER_NAME}}</p>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>
+                    <button type="button" class="btn btn-block btn-outline-danger" style="width: 18rem;" [routerLink]="['/adminDash']"><i
+                            class="fas fa-chevron-left"></i> Back to Dashboard</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

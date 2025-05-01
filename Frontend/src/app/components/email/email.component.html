@@ -1,0 +1,35 @@
+<div class="row d-flex justify-content-center align-items-center h-100 edit bg">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+    <div class="card shadow-2-strong border border-primary h-75" style="border-radius: 1rem;">
+      <div class="card-body p-5 text-center">
+        <h3 class="display-6">We are Thrift Ecommerce</h3>
+        <p class="lead">Enter your email to recover account</p>
+        <form #regForm='ngForm' (ngSubmit)='CustomerEmail(regForm)'>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" id="email" name="email"
+              [(ngModel)]="model.email" required>
+            <div class="input-group-append">
+            </div>
+          </div>
+          <span style="color: red;">{{emailSend}}</span>
+          <div class="row">
+            <!-- /.col -->
+            <div class="col-3">
+              <button type="submit" class="btn btn-primary btn" [disabled]=!regForm.form.valid>Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+        <br>
+        <div>
+          <p class="mb-2">
+            <a [routerLink]="['/register']" style="text-decoration: none; cursor:pointer;" class="text-center">Register as a new Customer</a>
+          </p>
+          <p class="mb-2">
+            <a [routerLink]="['/']" style="text-decoration: none; cursor:pointer;" class="text-center">Back to Thrift</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

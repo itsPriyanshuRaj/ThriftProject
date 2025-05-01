@@ -12,9 +12,14 @@ export class ShopComponent implements OnInit {
   p:number=1
   shopper:any=[]
   companies:any=[]
+  Category:any
+
+
   constructor(private router:Router,private http:HttpClient) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
    }
+  //  Method to get the category
+  
    CompanyFilter($event,company){
      console.log(company.company_id)
      this.http.get('http://localhost:3000/CompanyFilter/'+company.company_id).subscribe((res)=>{
@@ -29,10 +34,17 @@ export class ShopComponent implements OnInit {
       //console.log("Shopper",this.shopper)
     })
 
-    this.http.get('http://localhost:3000/getCategory').subscribe((res)=>{
-      this.companies=res;
-      //console.log("Companies",this.companies)
-    })
   }
 
+  CategoryFilter(category: string): void {
+    this.http.get<any[]>(`http://localhost:3000/getLimitData/100?category=${category}`).subscribe(
+      (res: any[]) => {
+        this.Category = res;
+        console.log(this.Category);
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
 }

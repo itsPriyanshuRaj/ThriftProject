@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-login',
@@ -7,17 +7,20 @@ import {Router} from '@angular/router';
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent implements OnInit {
-model:any={}
+  model: any = {}
+  password:string;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   }
-  Login($event){
-    
+  Login(_$event) {
+    if (this.model.password === '123') {
       this.router.navigate(['/adminDash']);
-    
-
+    } else {
+      window.alert('Wrong password');
+    }
   }
+  
 
 }

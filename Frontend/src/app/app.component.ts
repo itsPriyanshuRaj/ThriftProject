@@ -6,7 +6,7 @@ import { NavigationStart, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'thriftProjetc';
+  title = 'Thrift Ecommerce';
   showHead: boolean = false;
 
   constructor(router: Router) {
@@ -21,5 +21,8 @@ export class AppComponent {
           }
         }
       });
+
+      //
+     
 }
 }

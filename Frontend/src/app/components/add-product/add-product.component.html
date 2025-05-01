@@ -1,81 +1,127 @@
-<nav class="navbar bg-light">
-    <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1 text-center">Add Product</span>
+<div class="jumbotron jumbotron-fluid jumbo">
+    <div class="text-center">
+        <h1 class="display-5">Add Product</h1>
     </div>
-  </nav>
+</div>
+
+
 
 
 <!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="row justify-content-center" style="margin-top: -200px; z-index: 1px; ">
+        <div class="col-md-8">
+            <div class="card shadow animate__animated animate__fadeInUp" style="border: none;">
+                <div class="card-header">
+                    <h4 class="card-title lead"><b>Add Your Product Here</b></h4>
+                </div>
+                <div class="card-body">
+                    <form class="was-validated" #regForm='ngForm' (ngSubmit)="AddProduct(regForm)">
 
-<div class="container-fluid w-75 p-3 shadow p-3 mb-5 bg-body rounded">
-    <form class="was-validated" #regForm='ngForm' (ngSubmit)="AddProduct(regForm)">
-        <!-- Company Name -->
-        <div class="row mb-3">
-            <label for="firstname" class="col-sm-2 col-form-label">Company Name</label>
-            <div class="col-sm-10">
-                <input id="company" name="company" [(ngModel)]="model.company" #company="ngModel" type="text"
-                    class="form-control" required>
-            </div>
-        </div>
-        <!-- Product Name -->
-        <div class="row mb-3">
-            <label for="Product Name" class="col-sm-2 col-form-label">Product Name:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="product" name="product" [(ngModel)]="model.product"
-                    #product="ngModel" required>
-            </div>
-        </div>
-        <!-- Product Price -->
-        <div class="row mb-3">
-            <label for="Product Price" class="col-sm-2 col-form-label">Product Price:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="price" name="range" [(ngModel)]="model.range"
-                    #range="ngModel" required>
-            </div>
-        </div>
-        <!-- Product Description -->
-        <div class="row mb-3">
-            <label for="Product Description" class="col-sm-2 col-form-label">Product Desc:</label>
-            <div class="col-sm-10">
-                <input type="textarea" class="form-control" id="price" name="range" [(ngModel)]="model.description"
-                    #range="ngModel" required>
-            </div>
-        </div>
-        <!-- Product Category -->
-        <div class="row mb-3">
-            <label for="Product Description" class="col-sm-2 col-form-label">Product Category:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="price" name="range" [(ngModel)]="model.category"
-                    #range="ngModel" required>
-            </div>
-        </div>
-        <!-- Product Available -->
-        <div class="row mb-3">
-            <label for="Product Available" class="col-sm-2 col-form-label">Product Available:</label>
-            <div class="col-sm-10">
-                <div class="form-group">
+                        <br>
+                        <div class="row mb-2">
+                            <div class="col-md-2 pr-1">
+                                <label for="firstname"><b>Company ID</b></label>
+                            </div>
+                            <div class="col-md-9 pr-1">
+                                <div class="form-group">
+                                    <input id="companyID" name="companyID" [(ngModel)]="model.companyID" #companyID="ngModel"
+                                        type="text" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-2 pr-1">
+                                <label for="RollNumber"><b>Product Name</b></label>
+                            </div>
+                            <div class="col-md-9 pr-1">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="product" name="product"
+                                        [(ngModel)]="model.product" #product="ngModel" required>
+                                </div>
+                            </div>
+                        </div>
 
-                    <input type="radio" class="radio-inline " name="available" value="true"
-                        [(ngModel)]="model.available" #available="ngModel" required> <b> YES</b>
-                    &nbsp;
-                    <input type="radio" class="radio-inline " name="available" value="false"
-                        [(ngModel)]="model.available" #available="ngModel" required> <b> NO</b>
+                        <div class="row mb-2">
+                            <div class="col-md-2 pr-1">
+                                <label for="RollNumber"><b>Price</b></label>
+                            </div>
+                            <div class="col-md-9 pr-1">
+                                <div class="form-group">
+                                    <input type="text" class="form-control"
+                                        id="range" name="range" [(ngModel)]="model.range" #range="ngModel" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-2 pr-1">
+                                <label for="RollNumber"><b>Product Desc</b></label>
+                            </div>
+                            <div class="col-md-9 pr-1">
+                                <div class="form-group">
+                                    <input type="textarea" class="form-control" id="desc" name="desc"
+                                        [(ngModel)]="model.desc" #desc="ngModel" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-2 pr-1">
+                                <label for="RollNumber"><b>Category</b></label>
+                            </div>
+                            <div class="col-md-9 pr-1">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Category" name="Category"
+                                        [(ngModel)]="model.category" #category="ngModel" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-2 pr-1">
+                                <label for="RollNumber"><b>Photo Input</b></label>
+                            </div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <input type="file" id="photo" name="photo" (change)="handleFileInput($event)">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-2 pr-2">
+                                <label for="variant"><b>Product Available</b></label>
+                            </div>
+                            <div class="col-md-4 pr-1">
+                                <div class="form-group">
+
+                                    <input type="radio" class="radio-inline " name="available" value="true"
+                                        [(ngModel)]="model.available" #available="ngModel" required> <b> YES</b>
+                                    &nbsp;
+                                    <input type="radio" class="radio-inline " name="available" value="false"
+                                        [(ngModel)]="model.available" #available="ngModel" required> <b> NO</b>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- {{model|json}} -->
+
+
+
+
+                        <div class="text-right">
+                            <button [routerLink]="['/adminDash']" class="btn btn-outline-success"
+                                style="outline: none;">
+                                <i class="fas fa-chevron-left"></i> Back to Dashboard</button>&nbsp;
+                            <button type="submit" class="btn btn-outline-danger" [disabled]=!regForm.form.valid
+                                style="outline: none;">
+                                <i class="fas fa-plus"></i> Add Product</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- Product Image -->
-        <div class="row mb-3">
-            <label for="Product Image" class="col-sm-2 col-form-label">Product Image:</label>
-            <div class="form-group">
-                <!-- <input type="file" id="photo" name="photo" (change)="handleFileInput($event.target.files)"> -->
-            </div>
-        </div>
-    </form>
-    <div class="text-right">
-        <button [routerLink]="['/adminDash']" class="btn btn-outline-success" style="outline: none;">
-            <i class="fas fa-chevron-left"></i> Back to Dashboard</button>&nbsp;
-        <button type="submit" class="btn btn-outline-danger" [disabled]=!regForm.form.valid style="outline: none;">
-            <i class="fas fa-plus"></i> Add Product</button>
     </div>
-    <div class="clearfix"></div>
 </div>

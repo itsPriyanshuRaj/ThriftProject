@@ -1,0 +1,72 @@
+.jumbo {
+  background-image: linear-gradient(-45deg, #FFC796 0%, #FF6B95 100%);
+  height: 350px;
+}
+
+
+.button {
+  display: inline-block;
+  width: 160px;
+  height: 40px;
+  border: 2px solid red;
+  color: red;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  line-height: 35px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  background-color: transparent;
+  outline: none;
+  transition: all ease 0.5s;
+}
+
+.active {
+  font-size: 0;
+  width: 30px;
+  height: 30px;
+  border: 5px solid red;
+  border-radius: 50%;
+  border-left-color: transparent;
+  animation: rotate 1.4s ease 0.5s infinite;
+}
+
+.slider {
+  /* -webkit-appearance: none; */
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(360deg);
+  }
+}

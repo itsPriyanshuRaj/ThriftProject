@@ -4,28 +4,31 @@
     </div>
   </nav>
 
-<div>
-    <h1 class="display-6 text-center">ADMIN DASHBOARD</h1>
-</div>
+  <div class="container d-flex border border-secondary-subtle rounded mt-5 mb-4">
+    <div class="flex-shrink-0">
+        <img src="../../../assets/img/Sentiment analysis-amico.png"
+            alt="...">
+    </div>
+    <div class="flex-grow-1 ms-3">
+        <h3 class="display-5 text-center mt-2">Welcome to the Admin Dashboard</h3>
+        <!-- <p class="lead text-center">Enter your PIN access.</p> -->
+        <div class="mt-5 ms-5 ">
+            <div class="">
+                <button class="btn btn-info button-46 btn-lg mb-3"><a style="text-decoration:none; color: black;"
+                        [routerLink]="['/productAdd']" class="btn-box big span4">Add Product</a></button>
+                <!-- <br> -->
 
-<div class="container-fluid w-50 p-3">
-    <div>
-        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-            <img class="img-fluid"
-                src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8234.jpg?w=996&t=st=1662203074~exp=1662203674~hmac=0e6a5de5372f0a8b314b1c7d708a64b10e1e9f33720d986d425c55d86ad0d4c4"
-                alt="">
-            </div>
-        </div>
-        <!--/.container-->
-        <div class="row">
-            <div class="btn-controls">
-                <div class="btn-group" role="group">
-                    <button class="btn btn-warning me-5"><a style="text-decoration:none; color: black" [routerLink]="['/productAdd']" class="btn-box big span4"><b>AddProduct</b></a></button>
-                    <button class="btn btn-warning me-5"><a style="text-decoration:none; color: black;" [routerLink]="['/orderdash']" class="btn-box big span4"><b>Product List</b></a></button>
-                    <button class="btn btn-warning me-5"><a style="text-decoration:none; color: black" [routerLink]="['/adminOrder']" class="btn-box big span4"><b>Customer Orders</b></a></button>
-                    <button class="btn btn-danger"><a style="text-decoration:none; color: black" [routerLink]="['/']"><b>Logout</b> </a></button>
-                </div>
+                <button type="button" class="btn btn-info button-46 btn-lg mb-3"><a
+                        style="text-decoration:none; color:black;" [routerLink]="['/orderdash']"
+                        class="btn-box big span4">Product List</a></button>
+
+                <button type="button" class="btn btn-info button-46 btn-lg mb-3"><a
+                        style="text-decoration:none; color: black" [routerLink]="['/adminOrder']"
+                        class="btn-box big span4">Customer Orders</a></button>
+
+                <button type="button" class="btn btn-danger button-46 btn-lg mb-3"><a
+                        style="text-decoration:none; color: black" [routerLink]="['/']">Logout</a></button>
             </div>
         </div>
     </div>
-    <!--/.wrapper-->
+</div>

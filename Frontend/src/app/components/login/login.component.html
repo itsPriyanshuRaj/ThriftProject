@@ -1,59 +1,43 @@
-<!--================Login Box Area =================-->
+<div class="row d-flex justify-content-center align-items-center h-100 edit bg">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+    <div class="card shadow-2-strong border border-primary h-75" style="border-radius: 1rem;">
+      <div class="card-body p-5 text-center">
+        <h3 class="display-6">We are Thrift Ecommerce</h3>
+        <p class="lead">Please login to your account</p>
 
-<div class="hold-transition login-page">
-    <div class="container-fluid w-50 p-3">
-        <!-- /.login-logo -->
-        <div class="card">
-          <h6 class="display-6 text-center">Thrift</h6>
-          <div class="card-body login-card-body">
-            <p class="lead text-center">Sign in to start your session</p>
-      
-            <form #regForm='ngForm' (ngSubmit)='CustomerLogin(regForm)'>
-              <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Email" id="email" name="email" [(ngModel)]="model.email" required>
-                <div class="input-group-append">
-                  <!-- <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
-                  </div> -->
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" id="password" name="password" [(ngModel)]="model.password" required>
-                <div class="input-group-append">
-                  <!-- <div class="input-group-text">
-                    <span id="showpassword" name="showpassword" (click)="togglePassword($event)" class="fas fa-eye"></span>
-                  </div> -->
-                </div>
-              </div>
-              <div class="row">
-                <!-- <div class="col-8">
-                  <div class="icheck-primary">
-                    <span style="color:red">{{alert}}</span>          
-                  </div>
-                </div> -->
-                
-                <!-- /.col -->
-                <div class="col-4">
-                  <button type="submit" class="btn btn-primary" [disabled]=!regForm.form.valid>Sign In</button>
-                </div>
-                <!-- /.col -->
-              </div>
-            </form>
-      
-           
-            <!-- /.social-auth-links -->
-      
-            <p class="mb-1">
-              <a [routerLink]="['/email']" class="text-center">I forgot my password</a>
-            </p>
-            <p class="mb-2">
-              <a [routerLink]="['/register']" class="text-center">Register as a new Customer</a>
-            </p>
-            <p class="mb-2">
-              <a [routerLink]="['/']" class="text-center">Back to Thrift</a>
-            </p>
-          </div>
-          <!-- /.login-card-body -->
+        <form #regForm='ngForm' (ngSubmit)='CustomerLogin(regForm)'>
+           <!-- Email div -->
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" placeholder="Email" id="email" name="email" [(ngModel)]="model.email" required>
+          <label for="floatingInput">Email address</label>
         </div>
-      </div>
+
+        <!-- Password Div -->
+        <div class="form-floating">
+          <input type="password" class="form-control" placeholder="Password" id="password" name="password" [(ngModel)]="model.password" required>
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <!-- Login Button -->
+        <div>
+
+          <button class="btn btn-primary btn- mt-5" type="submit" [disabled]=!regForm.form.valid style="width: 15rem;">Login</button>
+        </div>
+
+      </form>
+
+        <!-- Register buttons -->
+    <div class="text-center mt-2">
+      <p class="mb-1">
+        <a [routerLink]="['/email']" class="text-center" style="text-decoration: none; cursor:pointer;" >I forgot my password</a>
+      </p>
+      <p class="mb-2">
+        <a [routerLink]="['/register']" class="text-center"  style="text-decoration: none; cursor:pointer;">Register as a new Customer</a>
+      </p>
+      <p class="mb-2">
+        <a [routerLink]="['/']" class="text-center"  style="text-decoration: none; cursor:pointer;">Back to Thrift</a>
+      </p>
     </div>
+      </div> 
+    </div>
+  </div>

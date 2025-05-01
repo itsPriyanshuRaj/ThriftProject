@@ -15,16 +15,16 @@ import { OrderComponent } from './components/order/order.component';
 import { ProductComponent } from './components/product/product.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ShopComponent } from './components/shop/shop.component';
-
+import { EmailComponent } from './components/email/email.component';
+import { AboutComponent } from './components/about/about.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'product/:id',component:ProductComponent},
-  //{path:'productReload/:id',component:ProductComponent},
+  {path: 'about', component:AboutComponent},
   {path:'admin',component:AdminLoginComponent},
   {path:'adminDash',component:AdminDashboardComponent},
   {path:'productAdd',component:AddProductComponent},
   {path:'cart',component:CartComponent},
-  //{path:'cartReload',component:CartComponent},
   {path:'shop',component:ShopComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
@@ -33,7 +33,7 @@ const routes: Routes = [
   {path:'adminOrder',component:AdminOrdersComponent},
   {path:'orders',component:OrderComponent},
   {path:'orderdash',component:AdminOrderDashComponent},
-  // {path:'email',component:EmailComponent},
+  {path:'email',component:EmailComponent},
   {path:'changePassword',component:ChangePasswordComponent}
  
 ];

@@ -9,53 +9,9 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 })
 export class CheckoutComponent implements OnInit {
 
-  // google pay gateway integration on the checkout page starts here
-  environment="TEST"
-  buttonColor="default" 
-  buttonType="buy"
-  buttonSizeMode="fill"
-  style="width: 274px; height: 61px;"
-  isCustomSize = false;
-  buttonWidth = 240;
-  buttonHeight = 40;
-  isTop = window === window.top;
-
-  paymentRequest = {
-    apiVersion: 2,
-    apiVersionMinor: 0,
-    allowedPaymentMethods: [
-      {
-        type: "CARD",
-        parameters: {
-          allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-          allowedCardNetworks: ["AMEX", "VISA", "MASTERCARD"]
-        },
-        tokenizationSpecification: {
-          type: "PAYMENT_GATEWAY",
-          parameters: {
-            gateway: "example",
-            gatewayMerchantId: "exampleGatewayMerchantId"
-          }
-        }
-      }
-    ],
-    merchantInfo: {
-      merchantId: "12345678901234567890",
-      merchantName: "Demo Merchant"
-    },
-    transactionInfo: {
-      totalPriceStatus: "FINAL",
-      totalPriceLabel: "Total",
-      totalPrice: "100.00",
-      currencyCode: "USD",
-      countryCode: "US"
-    }
-  };
-  onLoadPaymentData(event:any){
-    console.log("Load Payemnt Data: ", event.detail);
-  }
+  // google pay button integration
   
-  // google pay gateway integration on the checkout page starts here
+  //google pay button intergation
 
   constructor(private router:Router,private http:HttpClient) { }
   states=["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh", "Assam","Bihar","Chandigarh","Chhattisgarh","Delhi","Goa","Gujarat","Haryana", "Himachal Pradesh",
@@ -74,7 +30,7 @@ export class CheckoutComponent implements OnInit {
   order:any={}
 
   CheckoutProduct(regform:any){
-    console.log("chala")
+    console.log("Checkout Product func running");
     var loggeduser=JSON.parse(localStorage.getItem('user'))
     console.log("logged user",loggeduser)
     var customer_id=loggeduser[0].CUSTOMER_ID;
@@ -94,12 +50,12 @@ export class CheckoutComponent implements OnInit {
     this.order["customer_name"]=loggeduser[0].NAME
     this.order["payment_mode"]=this.model.payment;
     this.order["email"]=loggeduser[0].EMAIL
-    this.order["phone"]=loggeduser[0].PHONE
+    // this.order["phone"]=loggeduser[0].PHONE
 
     this.order["product"]=[]
     for(let x=0;x<stored.length;x++)
     {
-      this.order["product"].push({product:stored[x][0].company+' '+stored[x][0].name+' '+stored[x][0].colour+' '+stored[x][0].variant,price:stored[x][0].price,image:stored[x][0].image})
+      this.order["product"].push({product:stored[x][0].company+' '+stored[x][0].name,price:stored[x][0].price,image:stored[x][0].image})
     }
 
     var orderdata=JSON.stringify(this.order)
@@ -149,6 +105,9 @@ export class CheckoutComponent implements OnInit {
       }
   
     
+  }
+   onLoadPaymentData(event) {
+    console.log("load payment data", event.detail);
   }
 
 }

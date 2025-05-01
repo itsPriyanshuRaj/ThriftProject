@@ -1,115 +1,149 @@
-<!--================Checkout Area =================-->
-<section>
-    <div class="container-fluid shadow p-3 mb-5 bg-body rounded mt-5 w-75 p-3" routerLinkActive>
-        <div class="billing_details">
-            <div class="row">
-                <form class="row contact_form " #regform='ngForm' (ngSubmit)="CheckoutProduct(regform)">
-                    <div class="col-lg-8">
-                        <h3 class="display-6 text-center">Billing Details</h3>
-                        <div class="field col-md-6 form-group p_star ">
-                            <label for="pincode">&nbsp;Pincode</label>
-                            <input type="text" name="pincode" class="form-control" id="pincode" placeholder=" "
-                                maxlength="6" value="{{pin}}" oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                                [(ngModel)]="model.pincode" required>
+<div class="container shadow-sm border border-secondary-subtle m-4" routerLinkActive>
+    <h3 class="display-6 text-center">Enter Billing Details</h3>
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-5 col-md-6">
+            <!-- form starts here -->
+            <h3 class="display-6">Address Details</h3>
+            <form #regform='ngForm' (ngSubmit)="CheckoutProduct(regform)">
+                <div class="row">
+                    <div class="col">
+                        <!-- Address -->
+                        <div class=" mb-1">
+                            <label class="lead">Address</label>
+                            <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="{{address}}" [(ngModel)]="model.address" required>
                         </div>
-                        <div class="field col-md-6 form-group p_star ">
-                            <label for="locality">&nbsp;Locality</label>
-                            <input type="text" name="locality" class="form-control" id="locality" placeholder=" "
-                                value="{{locality}}" [(ngModel)]="model.locality" required>
-
-
+                        <!-- Pincode -->
+                        <div class=" mb-1">
+                            <label class="lead">PinCode</label>
+                            <input type="text" class="form-control" name="pincode" placeholder="PinCode" maxlength="6" value="{{pin}}" oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                            [(ngModel)]="model.pincode" required>
                         </div>
-                        <div class=" col-md-12 form-group p_star">
-                            <h6>&nbsp;Address (Area and Street)</h6>
-                            <textarea class="form-control" name="address" id="address" rows="1" placeholder=" "
-                                value="{{address}}" [(ngModel)]="model.address" required></textarea>
+                        <!-- Locality -->
+                        <div class=" mb-1">
+                            <p class="lead">Locality</p>
+                            <input type="text" name="locality" class="form-control" placeholder="Locality"  value="{{locality}}" [(ngModel)]="model.locality" required>
                         </div>
-                        <div class="col-md-12 form-group p_star">
-                            <h6>&nbsp; Select State</h6>
-                            <select class="country_select mt-1 mb-4" id="state" name="state" [(ngModel)]="model.state"
-                                value="{{state}}" required>
-                                <option disabled>Select State</option>
-                                <option value="{{s}}" *ngFor="let s of states">{{s}}</option>
-
-                            </select>
+                        <!-- State -->
+                        <div class=" mb-1">
+                            <label class="lead">Select State</label><br>
+                            <select id="state" name="state" [(ngModel)]="model.state"
+                            value="{{state}}" required>
+                            <option disabled>Select State</option>
+                            <option value="{{s}}" *ngFor="let s of states">{{s}}</option>
+                        </select>
+                            
                         </div>
-                        <div class="field col-md-6 form-group p_star ">
-
-                            <label for="city">&nbsp;City/District/Town</label>
-                            <input type="text" name="city" class="form-control" id="city" placeholder=" "
-                                [(ngModel)]="model.city" value="{{city}}" required>
-
-
+                        <!-- City-->
+                        <div class=" mb-1">
+                            <label class="lead">City</label>
+                            <input type="text" name="city" class="form-control" placeholder="City" id="city" [(ngModel)]="model.city" value="{{city}}" required>
                         </div>
-                        <div class="field col-md-6 form-group p_star mt-4">
-                            <label for="landmark">&nbsp;Landmark(Optional)</label>
-                            <input type="text" name="landmark" class="form-control" id="landmark" placeholder=" ">
+                        <!-- Landmark(Optional) -->
+                        <div class=" mb-3">
+                            <label class="lead">LandMark (Optional)</label>
+                            <input type="text" name="landmark" class="form-control" placeholder="Landmark" id="landmark">
                         </div>
 
-                        <br>
-                    </div>
-                    <div class="col-lg-4 rounded" style="background-color:ghostwhite;">
-                        <div class="order_box">
-                            <h2 class="display-6">Your Order</h2>
-                            <hr>
-                            <ul class="list-group">
-                                <li class="list-group-item"><a style="text-decoration: none;" href="#">
-                                        <h4>Product Total></h4>
-                                    </a></li>
-                                <li class="list-group-item" *ngFor="let stores of stored"><a style="cursor: pointer;">
-                                        {{stores[0].name}}<span class="middle"></span> <span
-                                            class="last">{{stores[0].price | currency: "&#8377;"}}</span></a></li>
+                        <!-- Address Type -->
+                        <div class=" mb-3">
+                            <label class="lead">Select Address Type</label><br>
 
-                            </ul>
-                            <ul class="list list_2">
-                                <li class="list-group-item"><a style="cursor: pointer;">Subtotal <span>{{total |
-                                            currency:
-                                            "&#8377;"}}</span></a></li>
-                                <li class="list-group-item"><a style="cursor: pointer;">Shipping
-                                        <span><del>&#8377;500.00</del><span style="color:green">*Free</span></span></a>
-                                </li>
-                                <li class="list-group-item"><a style="cursor: pointer;">Total <span>{{total | currency:
-                                            "&#8377;"}}</span></a>
-                                </li>
-                            </ul>
-                            <div class="payment_item">
-                                <div class="radion_btn">
-                                    <input type="radio" name="payment" id="Cash" value="Cash"
-                                        [(ngModel)]="model.payment" required>
-                                    <label for="Cash">Cash on Delivery(COD)</label>
-                                    <div class="check"></div>
-                                </div>
-                                <p class="border border-light">Please send a check to Store Name, Store Street, Store
-                                    Town, Store State / County,
-                                    Store Postcode.</p>
+                            <!-- Home type -->
+                            <div class="radion_btn">
+                                <input type="radio" id="home" name="address_type" value="home"
+                                    [(ngModel)]="model.address_type" [checked]="type == 'home' ? true : false"
+                                    required>
+                                <label for="home">Home<br />(All day delivery)</label>
+
+                                <div class="check"></div>
                             </div>
-                            <div class="payment_item active">
-                                <div class="radion_btn">
-                                    <input type="radio" id="Online" value="Online" name="payment"
-                                        [(ngModel)]="model.payment" required>
-                                    <label for="Online">Online (Debit/Credit/UPI) </label>
-                                    &nbsp;&nbsp;&nbsp;<img src="" alt="">
-                                    <div class="check"></div>
-                                </div>
-                                <!-- throwing error type string is not assingable -->
-                                <!-- <google-pay-button environment="TEST" [buttonColor]="buttonColor" [buttonType]="buttonType"
-                                [buttonSizeMode]="isCustomSize ? 'fill' : 'static'" [paymentRequest]="paymentRequest" [style.width.px]="buttonWidth"
-                                [style.height.px]="buttonHeight" (loadpaymentdata)="onLoadPaymentData($event)"></google-pay-button> -->
-                            </div>
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option4" name="selector">
-                                <label for="f-option4">I’ve read and accept</label>
-                                <label for="f-option4">the terms & conditions* </label>
-                            </div>
-                            <div class="text-center">
-                                <button class="btn btn-primary" [routerLink]="['/confirmation']"
-                                    [disabled]=!regform.form.valid>Proceed to Pay</button>
+                            <br>
+                            <!-- Work Type -->
+                            <div class="radion_btn">
+                                <input type="radio" id="work" name="address_type" value="work"
+                                    [(ngModel)]="model.address_type" [checked]="type == 'work' ? true : false"
+                                    required>
+                                <label for="work">Work <br />(Delivery between 10AM-5PM)</label>
+                                <div class="check"></div>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn button-81 mt-4 mb-4" [disabled]=!regform.form.valid>Confirm Order</button>
+                </div>
+            </form>
+            <!-- form ends here -->
         </div>
+
+        <!-- Side Panel -->
+        <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+            <div class="card bg-primary text-white rounded-3">
+                <h3 class="display-5 text-center">Payment Details</h3>
+                <hr>
+                <h3 class="display-6 ms-3">Payment Type</h3>
+                <!-- Cash on Delivery -->
+                <div class="ms-3">
+                    <input type="radio" name="payment" id="Cash" value="Cash" [(ngModel)]="model.payment" required>
+                    <label class="lead" for="Cash">Cash on Delivery(COD)</label>
+                </div>
+                <!-- Online Payment -->
+                <div class="ms-3">
+                    <input type="radio" id="Online" value="Online" name="payment" [(ngModel)]="model.payment"
+                        required>
+                    <label class="lead" for="Cash">Online</label>
+                </div>
+                <google-pay-button environment="TEST" buttonType="buy" buttonColor="black" [paymentRequest]="{
+                apiVersion: 2,
+                apiVersionMinor: 0,
+                allowedPaymentMethods: [
+                {
+                type: 'CARD',
+                parameters: {
+                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                allowedCardNetworks: ['AMEX', 'VISA', 'MASTERCARD']
+                },
+                tokenizationSpecification: {
+                type: 'PAYMENT_GATEWAY',
+                parameters: {
+                gateway: 'example',
+                gatewayMerchantId: 'exampleGatewayMerchantId'
+                }
+                }
+                }
+                ],
+                merchantInfo: {
+                merchantId: '12345678901234567890',
+                merchantName: 'Demo Merchant'
+                },
+                transactionInfo: {
+                totalPriceStatus: 'FINAL',
+                totalPriceLabel: 'Total',
+                totalPrice: '100.00',
+                currencyCode: 'USD',
+                countryCode: 'US'
+                }
+                }" (loadpaymentdata)="onLoadPaymentData($event)"></google-pay-button>
+
+                <hr>
+                <!-- Product Details -->
+                <h2 class="display-6 ms-3">Product Details</h2>
+                <ul class="list-group">
+                    <!-- Product Name -->
+                    <li class="list-group-item lead" *ngFor="let stores of stored"><a
+                            style="cursor: pointer;">{{stores[0].name}}<span class="middle"></span> <span
+                                class="last">{{stores[0].price | currency:"&#8377;"}}</span></a></li>
+                    <!-- Product Price -->
+                    <li class="list-group-item lead"><a style="cursor: pointer;">Subtotal <span>{{total | currency:
+                        "&#8377;"}}</span></a></li>
+                </ul>
+            </div>
+            
+
+        </div>
+
+
     </div>
-</section>
-<!--================End Checkout Area =================-->
+</div>

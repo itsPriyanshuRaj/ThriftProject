@@ -1,61 +1,55 @@
+<div class="container-fluid h-100">
+  <div class="row">
+    <!-- Column1 -->
+    <!-- Search box template starts-->
+    <div class="col-2 border border-start-0 pf">
+      <h1 class="bg text-center display-6">Product Filter</h1>
+      <div class="mt-3 ms-1">
+        <label for="lead">Search Your Product Here</label>
+        <div class="search-container">
+          <input type="text" placeholder="Search..." [(ngModel)]="search">
+          <!-- <button type="button"><i class="fa fa-search">Search</i></button> -->
+        </div>
+      </div>
+      <!-- Search box template ends-->
 
-<!-- ================ category section start ================= -->		  
-<section class="section-margin--small mb-5">
-  <div class="card-top container-fluid">
-    <div class="container d-flex">
-        <div class="item">
-            <a>
-                <img src="https://cdn-icons-png.flaticon.com/512/1474/1474713.png" alt="">
-                <h6>All products</h6>
-            </a>
+      <!--Category Filter  Template-->
+      <div class="mt-4 mb-4 ms-1">
+        <p for="">Filter By Category</p>
+        <div class="search-container">
+          <input type="text" id="categoryFilter" name="categoryFilter" placeholder="Search..." [(ngModel)]="Category">
+          <!-- <button (click)="CategoryFilter(Category)">Filter</button> -->
         </div>
-        <div class="item">
-            <a>
-                <img src="https://cdn-icons-png.flaticon.com/512/3696/3696504.png" alt="">
-                <h6>Electronics</h6>
-            </a>
-        </div>
-        <div class="item">
-            <a>
-                <img src="https://cdn-icons-png.flaticon.com/512/170/170951.png" alt="">
-                <h6>Furniture</h6>
-            </a>
-        </div>
+      </div>
+      <!-- Category filter template -->
     </div>
-  </div>
-    <div class="container shadow p-3 mb-5 bg-body rounded">
-      <div class="row">
-        <div class="col-xl-9 col-lg-8 col-md-7">
-          <!-- Start Filter Bar -->
-          <div class="filter-bar d-flex flex-wrap align-items-center">
-            
-            <div class="sorting mr-auto">
-              <button type="button" class="btn btn-block btn-outline-info btn-light" (click)="ngOnInit()">Show All Products</button>
-            </div>
-          </div>
-          <!-- End Filter Bar -->
-          <!-- Start Best Seller -->
-          <section class="lattest-product-area pb-40 category-list">
-            <div class="row">
-              <div *ngFor="let shop of shopper" class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <a [routerLink]="['/product/',shop.PRODUCT_ID]"><img class="card-img" src="http://localhost:3000/{{shop.PRODUCT_IMAGE}}" alt=""></a>
-                   
-                  </div>
-                  <div class="card-body">
-                    <p>{{shop.COMPANY_NAME}}</p>
-                    <h4 class="card-product__title"><a [routerLink]="['/product/',shop.PRODUCT_ID]">{{shop.PRODUCT_NAME}}</a></h4>
-                    <p class="card-product__price">{{shop.PRICE | currency: "&#8377; "}}</p>
-                  </div>
-                </div>
+    <div class="col border border-end-0">
+      <!-- Column2 -->
+      
+
+      <div class="container-fluid h-100">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let shop of shopper | filter:search |filter:Category | paginate:{itemsPerPage:6,currentPage:p};" >
+            <figure class="card card-product-grid">
+              <div class="img-wrap text-center">
+                <a [routerLink]="['/product/',shop.PRODUCT_ID]"><img class="card-img"
+                    src="http://localhost:3000/{{shop.PRODUCT_IMAGE}}" alt="Image"></a>
               </div>
-             
-            </div>
-            <!-- <pagination-controls (pageChange)="p=$event"></pagination-controls> -->
-          </section>
-          <!-- End Best Seller -->
+              <figcaption class="info-wrap border-top">
+                <div class="price-wrap">
+                  <strong class="price">{{shop.PRICE | currency: "&#8377; "}}</strong>
+                </div>
+                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;"
+                  class="title mb-2">{{shop.PRODUCT_NAME}}</p>
+                <a href="#" class="btn btn-primary" [routerLink]="['/product',shop.PRODUCT_ID]">See
+                  Product</a>
+                <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
+              </figcaption>
+            </figure>
+          </div>
+          <pagination-controls (pageChange)="p=$event"></pagination-controls>
         </div>
       </div>
     </div>
-  </section> 
+  </div>
+</div>

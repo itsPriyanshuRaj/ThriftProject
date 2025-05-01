@@ -1,5 +1,5 @@
-<section>
-  <div class="container-fluid shadow p-3 mb-5 bg-body rounded mt-5 w-75 p-3">
+<section class="container-fluid shadow p-3 mb-5 bg-body rounded mt-5 w-75 p-3">
+  <div id="printdiv">
     <div class="container">
       <p class="text-center billing-alert">Thank You {{loggeduser[0].NAME}}. Your order has been received.</p>
       <div class="row mb-5">
@@ -116,7 +116,7 @@
     </div>
   </div>
   <div style="text-align: center;">
-  <button  class="btn btn-primary mb-2" (click)="Invoice($event,'printdiv')"><i class="fas fa-file-invoice"></i> Print Invoice</button>&nbsp;&nbsp;
-  <button  class="btn btn-primary mb-2" (click)="Shopping()"><i class="fas fa-shopping-basket"></i> Continue Shopping</button>
+  <button  class="btn btn-primary" (click)="Invoice($event,'printdiv')"><i class="fas fa-file-invoice"></i> Print Invoice</button>&nbsp;&nbsp;
+  <button  class="btn btn-primary" (click)="Shopping()"><i class="fas fa-shopping-basket"></i> Continue Shopping</button>
 </div>
   </section>

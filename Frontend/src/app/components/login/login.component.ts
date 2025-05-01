@@ -29,8 +29,11 @@ export class LoginComponent implements OnInit {
         var stored=JSON.parse(localStorage.getItem('user'))
         console.log(stored)
         this.router.navigate(['/'])
+        window.alert("welcome to Thrift Ecommerce");
       }
-      else  this.alert="Invalid Username or Password"
+      else  {
+        this.alert="Invalid Username or Password"
+      }// window.alert("Invalid Username or Password");
       //console.log("Result ",this.result)
     //console.log("Sucess",this.result.success)
     })

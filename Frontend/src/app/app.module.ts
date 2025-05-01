@@ -22,6 +22,13 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { AdminOrderDashComponent } from './components/admin-order-dash/admin-order-dash.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
+import { PaymentComponent } from './components/payment/payment.component';
+import { EmailComponent } from './components/email/email.component';
+import { AboutComponent } from './components/about/about.component';
+// import { Pipe } from '@angular/core';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,13 +49,18 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
     ConfirmationComponent,
     AdminOrderDashComponent,
     AdminOrdersComponent,
+    PaymentComponent,
+    EmailComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    GooglePayButtonModule
+    GooglePayButtonModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

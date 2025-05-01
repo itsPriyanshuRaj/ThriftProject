@@ -14,6 +14,7 @@ export class AdminOrderDashComponent implements OnInit {
   tableWidget:any
   x:number=0
   response:any
+  
   constructor(private router:Router,private http:HttpClient) { }
     Delete(id){
       console.log(id)

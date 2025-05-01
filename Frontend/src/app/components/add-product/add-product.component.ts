@@ -10,16 +10,16 @@ import {Router} from '@angular/router';
 
 
 export class AddProductComponent implements OnInit {
-  model:any={}
-  fileToUpload: File = null;
-  handleFileInput(files:FileList){
-    this.fileToUpload=files.item(0);
-    console.log(this.fileToUpload);
-    const formData: FormData = new FormData();
-    formData.append('Image', this.fileToUpload);
-    this.http.post('http://localhost:3000/upload',formData).subscribe((res)=>{
-       console.log(res);
-     });
+ model:any={}
+ fileToUpload: File = null;
+ handleFileInput(event){
+  this.fileToUpload=event.target.files[0];
+     console.log(this.fileToUpload);
+     const formData: FormData = new FormData();
+     formData.append('Image', this.fileToUpload);
+  this.http.post('http://localhost:3000/upload',formData).subscribe((res)=>{
+    console.log(res);
+    });
  }
 
   constructor(private http:HttpClient,private router: Router) { 
@@ -29,21 +29,8 @@ export class AddProductComponent implements OnInit {
   
   AddProduct(regform:any)
  {
-  
-   /*var firstname=regform.controls.first.value;
-   var secondname=regform.controls.second.value;
-   var address=regform.controls.address.value;
-   var city=regform.controls.city.value;
-   var gender=regform.controls.gender.value;
-   alert(firstname+" "+secondname+" "+gender+" "+address+" "+city);*/
-    //console.log(this.model);
-    /*const data=JSON.stringify(this.model);
-    console.log(data);
-    this.http.post('http://localhost:3000/process',data,{headers: new HttpHeaders({'Content-Type': 'application/json'})}).subscribe((res)=>{
-      console.log(res);
-    });*/
     const data=JSON.stringify(this.model);
-    console.log("Data Found",data);
+    console.log("Data hai",data);
    
     this.http.post('http://localhost:3000/process',data,{headers: new HttpHeaders({'Content-Type': 'application/json'})}).subscribe((res)=>{
       console.log(res);

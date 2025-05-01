@@ -1,0 +1,11 @@
+body{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+.bg{
+    /* background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); */
+}
+
+ul li{
+    background-color:inherit;
+}
